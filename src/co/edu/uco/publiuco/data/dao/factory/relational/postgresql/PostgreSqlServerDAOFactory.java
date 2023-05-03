@@ -2,6 +2,7 @@ package co.edu.uco.publiuco.data.dao.factory.relational.postgresql;
 
 import java.sql.Connection;
 
+import co.edu.uco.publiuco.crosscutting.utils.UtilSql;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
@@ -25,7 +26,7 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 
 	@Override
 	public final void cerrarConexion() {
-		
+		UtilSql.closeConnection(connection);
 	}
 
 	@Override
