@@ -25,7 +25,6 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 
 	@Override
 	public final void cerrarConexion() {
-		// It's my homework
 		
 	}
 
