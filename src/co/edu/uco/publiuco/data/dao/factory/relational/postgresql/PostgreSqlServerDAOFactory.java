@@ -2,12 +2,21 @@ package co.edu.uco.publiuco.data.dao.factory.relational.postgresql;
 
 import java.sql.Connection;
 
+
 import co.edu.uco.publiuco.crosscutting.utils.UtilSql;
+import co.edu.uco.publiuco.data.dao.AdministradorCategoriaDAO;
+import co.edu.uco.publiuco.data.dao.CalificacionDAO;
+import co.edu.uco.publiuco.data.dao.CategoriaAdministradorCategoriaDAO;
+import co.edu.uco.publiuco.data.dao.CategoriaDAO;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
-import co.edu.uco.publiuco.data.dao.relational.sqlserver.EstadoSqlServerDAO;
-import co.edu.uco.publiuco.data.dao.relational.sqlserver.TipoRelacionInstitucionSqlServerDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.AdministradorCategoriaPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.CalificacionPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaAdministradorCategoriaPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.EstadoPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoRelacionInstitucionPostgreSqlDAO;
 
 public final class PostgreSqlServerDAOFactory extends DAOFactory{
 
@@ -49,12 +58,32 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 
 	@Override
 	public final EstadoDAO getEstado() {
-		return new EstadoSqlServerDAO(connection);
+		return new EstadoPostgreSqlDAO(connection);
 	}
 
 	@Override
 	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucion() {
-		return new TipoRelacionInstitucionSqlServerDAO(connection);
+		return new TipoRelacionInstitucionPostgreSqlDAO(connection);
 	}
 
+	@Override
+	public final AdministradorCategoriaDAO getAdministradorCategoria() {
+		return new AdministradorCategoriaPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public CalificacionDAO getCalificacion() {
+		return new CalificacionPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public CategoriaAdministradorCategoriaDAO getCategoriaAdministradorCategoria() {
+		return new CategoriaAdministradorCategoriaPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public CategoriaDAO getCategoria() {
+		return new CategoriaPostgreSqlDAO(connection);
+	}
+	
 }
