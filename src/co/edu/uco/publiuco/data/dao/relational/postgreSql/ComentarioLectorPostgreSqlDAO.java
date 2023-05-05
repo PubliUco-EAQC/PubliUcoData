@@ -14,7 +14,6 @@ public class ComentarioLectorPostgreSqlDAO implements ComentarioLectorDAO {
 	
 	@Override
 	public void create(ComentarioLectorEntity entity) {
-		// TODO Auto-generated method stub
 		
 	}
 
