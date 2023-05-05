@@ -8,6 +8,9 @@ import co.edu.uco.publiuco.data.dao.AdministradorCategoriaDAO;
 import co.edu.uco.publiuco.data.dao.CalificacionDAO;
 import co.edu.uco.publiuco.data.dao.CategoriaAdministradorCategoriaDAO;
 import co.edu.uco.publiuco.data.dao.CategoriaDAO;
+import co.edu.uco.publiuco.data.dao.ComentarioRevisorDAO;
+import co.edu.uco.publiuco.data.dao.EscritorDAO;
+import co.edu.uco.publiuco.data.dao.EscritorPublicacionDAO;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
@@ -15,6 +18,9 @@ import co.edu.uco.publiuco.data.dao.relational.postgreSql.AdministradorCategoria
 import co.edu.uco.publiuco.data.dao.relational.postgreSql.CalificacionPostgreSqlDAO;
 import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaAdministradorCategoriaPostgreSqlDAO;
 import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.ComentarioRevisorPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.EscritorPostgreSqlDAO;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.EscritorPublicacionPostgreSqlDAO;
 import co.edu.uco.publiuco.data.dao.relational.postgreSql.EstadoPostgreSqlDAO;
 import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoRelacionInstitucionPostgreSqlDAO;
 
@@ -57,11 +63,6 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public final EstadoDAO getEstado() {
-		return new EstadoPostgreSqlDAO(connection);
-	}
-
-	@Override
 	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucion() {
 		return new TipoRelacionInstitucionPostgreSqlDAO(connection);
 	}
@@ -84,6 +85,26 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	@Override
 	public CategoriaDAO getCategoria() {
 		return new CategoriaPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public ComentarioRevisorDAO getComentarioRevisor() {
+		return new ComentarioRevisorPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public EscritorDAO getEscritor() {
+		return new EscritorPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public EscritorPublicacionDAO getEscritorPublicacion() {
+		return new EscritorPublicacionPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public final EstadoDAO getEstado() {
+		return new EstadoPostgreSqlDAO(connection);
 	}
 	
 }

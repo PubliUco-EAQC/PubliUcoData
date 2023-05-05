@@ -2,6 +2,10 @@ package co.edu.uco.publiuco.data.dao.factory.relational.sqlserver;
 
 import java.sql.Connection;
 
+import co.edu.uco.publiuco.data.dao.AdministradorCategoriaDAO;
+import co.edu.uco.publiuco.data.dao.CalificacionDAO;
+import co.edu.uco.publiuco.data.dao.CategoriaAdministradorCategoriaDAO;
+import co.edu.uco.publiuco.data.dao.CategoriaDAO;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
@@ -55,6 +59,30 @@ public final class SqlServerDAOFactory extends DAOFactory{
 	@Override
 	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucion() {
 		return new TipoRelacionInstitucionSqlServerDAO(connection);
+	}
+
+	@Override
+	public AdministradorCategoriaDAO getAdministradorCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CalificacionDAO getCalificacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CategoriaAdministradorCategoriaDAO getCategoriaAdministradorCategoria() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CategoriaDAO getCategoria() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

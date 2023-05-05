@@ -4,6 +4,10 @@ import co.edu.uco.publiuco.data.dao.AdministradorCategoriaDAO;
 import co.edu.uco.publiuco.data.dao.CalificacionDAO;
 import co.edu.uco.publiuco.data.dao.CategoriaAdministradorCategoriaDAO;
 import co.edu.uco.publiuco.data.dao.CategoriaDAO;
+import co.edu.uco.publiuco.data.dao.ComentarioLectorDAO;
+import co.edu.uco.publiuco.data.dao.ComentarioRevisorDAO;
+import co.edu.uco.publiuco.data.dao.EscritorDAO;
+import co.edu.uco.publiuco.data.dao.EscritorPublicacionDAO;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
 import co.edu.uco.publiuco.data.dao.factory.relational.postgresql.PostgreSqlServerDAOFactory;
@@ -39,9 +43,7 @@ public abstract class DAOFactory {
 	public abstract void confirmaTransaccion();
 	
 	public abstract void cancelarTransaccion();
-	
-	public abstract EstadoDAO getEstado();
-	
+		
 	public abstract TipoRelacionInstitucionDAO getTipoRelacionInstitucion();
 
 	public abstract AdministradorCategoriaDAO getAdministradorCategoria();
@@ -51,6 +53,14 @@ public abstract class DAOFactory {
 	public abstract CategoriaAdministradorCategoriaDAO getCategoriaAdministradorCategoria();
 
 	public abstract CategoriaDAO getCategoria();
+	
+	public abstract ComentarioRevisorDAO getComentarioRevisor();
+
+	public abstract EscritorDAO getEscritor();
+	
+	public abstract EscritorPublicacionDAO getEscritorPublicacion();
+	
+	public abstract EstadoDAO getEstado();
 
 	
 }
