@@ -63,13 +63,13 @@ public abstract class DAOFactory {
 	
 	protected abstract void abrirConexion();
 	
-	public abstract void cerrarConexion();
+	public abstract void closeTransaction();
 	
-	public abstract void iniciarTransaccion();
+	public abstract void initTransaction();
 	
-	public abstract void confirmaTransaccion();
+	public abstract void commitTransaction();
 	
-	public abstract void cancelarTransaccion();
+	public abstract void cancelTransaction();
 		
 	public abstract TipoRelacionInstitucionDAO getTipoRelacionInstitucion();
 

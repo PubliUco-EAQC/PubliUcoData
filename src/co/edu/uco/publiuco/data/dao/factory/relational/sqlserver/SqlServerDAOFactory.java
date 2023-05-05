@@ -58,25 +58,25 @@ public final class SqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public final void cerrarConexion() {
+	public final void closeTransaction() {
 		// It's my homework
 		
 	}
 
 	@Override
-	public final void iniciarTransaccion() {
+	public final void initTransaction() {
 		// It's my homework (serAutoCommit -> false)
 		
 	}
 
 	@Override
-	public final void confirmaTransaccion() {
+	public final void commitTransaction() {
 		// It's my homework (Commit)
 		
 	}
 
 	@Override
-	public final void cancelarTransaccion() {
+	public final void cancelTransaction() {
 		// It's my homework (rollBack)
 		
 	}
