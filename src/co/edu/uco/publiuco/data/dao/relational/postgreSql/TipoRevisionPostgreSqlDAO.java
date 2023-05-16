@@ -24,16 +24,5 @@ public class TipoRevisionPostgreSqlDAO implements TipoRevisionDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoRevisionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoRevisionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

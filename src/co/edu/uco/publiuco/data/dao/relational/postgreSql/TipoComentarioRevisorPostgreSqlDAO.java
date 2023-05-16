@@ -24,15 +24,4 @@ public class TipoComentarioRevisorPostgreSqlDAO implements TipoComentarioRevisor
 		return null;
 	}
 
-	@Override
-	public void update(TipoComentarioRevisorEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoComentarioRevisorEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 }

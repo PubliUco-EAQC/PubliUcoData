@@ -25,15 +25,4 @@ public class TipoIdentificacionPostgreSqlDAO implements TipoIdentificacionDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoIdentificacionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoIdentificacionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 }

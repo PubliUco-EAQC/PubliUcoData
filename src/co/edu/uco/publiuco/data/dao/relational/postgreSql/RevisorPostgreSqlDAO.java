@@ -2,6 +2,7 @@ package co.edu.uco.publiuco.data.dao.relational.postgreSql;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.publiuco.data.dao.RevisorDAO;
 import co.edu.uco.publiuco.entities.RevisorEntity;
@@ -31,7 +32,7 @@ public class RevisorPostgreSqlDAO implements RevisorDAO {
 	}
 
 	@Override
-	public void delete(RevisorEntity entity) {
+	public void delete(UUID entity) {
 		// TODO Auto-generated method stub
 		
 	}

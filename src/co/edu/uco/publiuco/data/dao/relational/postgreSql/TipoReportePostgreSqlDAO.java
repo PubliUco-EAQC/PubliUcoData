@@ -24,16 +24,5 @@ public class TipoReportePostgreSqlDAO implements TipoReporteDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoReporteEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoReporteEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -2,6 +2,7 @@ package co.edu.uco.publiuco.data.dao.relational.postgreSql;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.publiuco.data.dao.PlanPublicacionDAO;
 import co.edu.uco.publiuco.entities.PlanPublicacionEntity;
@@ -31,7 +32,7 @@ public class PlanPublicacionPostgreSqlDAO implements PlanPublicacionDAO {
 	}
 
 	@Override
-	public void delete(PlanPublicacionEntity entity) {
+	public void delete(UUID entity) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -24,16 +24,5 @@ public class TipoEstadoPostgreSqlDAO implements TipoEstadoDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoEstadoEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoEstadoEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -25,16 +25,5 @@ public final class TipoRelacionInstitucionPostgreSqlDAO implements TipoRelacionI
 		return null;
 	}
 
-	@Override
-	public final void update(final TipoRelacionInstitucionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public final void delete(final TipoRelacionInstitucionEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

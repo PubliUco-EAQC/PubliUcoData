@@ -2,98 +2,28 @@ package co.edu.uco.publiuco.data.dao.factory.relational.postgresql;
 
 import java.sql.Connection;
 
-import co.edu.uco.publiuco.crosscutting.utils.UtilSql;
-import co.edu.uco.publiuco.data.dao.AdministradorCategoriaDAO;
-import co.edu.uco.publiuco.data.dao.CalificacionDAO;
-import co.edu.uco.publiuco.data.dao.CategoriaAdministradorCategoriaDAO;
-import co.edu.uco.publiuco.data.dao.CategoriaDAO;
-import co.edu.uco.publiuco.data.dao.ComentarioLectorDAO;
-import co.edu.uco.publiuco.data.dao.ComentarioRevisorDAO;
-import co.edu.uco.publiuco.data.dao.EscritorDAO;
-import co.edu.uco.publiuco.data.dao.EscritorPublicacionDAO;
-import co.edu.uco.publiuco.data.dao.EstadoDAO;
-import co.edu.uco.publiuco.data.dao.HistorialAccesoPublicacionDAO;
-import co.edu.uco.publiuco.data.dao.LectorDAO;
-import co.edu.uco.publiuco.data.dao.ObservacionRevisionDAO;
-import co.edu.uco.publiuco.data.dao.PaisDAO;
-import co.edu.uco.publiuco.data.dao.PalabraClavePublicacionDAO;
-import co.edu.uco.publiuco.data.dao.PerfilDAO;
-import co.edu.uco.publiuco.data.dao.PersonaDAO;
-import co.edu.uco.publiuco.data.dao.PlanCategoriaDAO;
-import co.edu.uco.publiuco.data.dao.PlanPublicacionDAO;
-import co.edu.uco.publiuco.data.dao.PreferenciaEscritorDAO;
-import co.edu.uco.publiuco.data.dao.PublicacionDAO;
-import co.edu.uco.publiuco.data.dao.ReporteDAO;
-import co.edu.uco.publiuco.data.dao.RespuestaDAO;
-import co.edu.uco.publiuco.data.dao.RevisionDAO;
-import co.edu.uco.publiuco.data.dao.RevisorDAO;
-import co.edu.uco.publiuco.data.dao.RevisorRevisionDAO;
-import co.edu.uco.publiuco.data.dao.SuscripcionCategoriaDAO;
-import co.edu.uco.publiuco.data.dao.SuscripcionPublicacionDAO;
-import co.edu.uco.publiuco.data.dao.TipoAccesoDAO;
-import co.edu.uco.publiuco.data.dao.TipoComentarioRevisorDAO;
-import co.edu.uco.publiuco.data.dao.TipoEscritorDAO;
-import co.edu.uco.publiuco.data.dao.TipoEstadoDAO;
-import co.edu.uco.publiuco.data.dao.TipoIdentificacionDAO;
-import co.edu.uco.publiuco.data.dao.TipoRelacionInstitucionDAO;
-import co.edu.uco.publiuco.data.dao.TipoReporteDAO;
-import co.edu.uco.publiuco.data.dao.TipoRevisionDAO;
-import co.edu.uco.publiuco.data.dao.VersionDAO;
+import co.edu.uco.publiuco.data.dao.*;
+import co.edu.uco.publiuco.data.dao.relational.postgreSql.*;
+import co.edu.uco.publiuco.utils.UtilSql;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.AdministradorCategoriaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.CalificacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaAdministradorCategoriaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.CategoriaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.ComentarioLectorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.ComentarioRevisorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.EscritorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.EscritorPublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.EstadoPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.HistorialAccesoPublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.LectorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.ObservacionRevisionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PaisPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PalabraClavePublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PerfilPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PersonaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PlanCategoriaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PlanPublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PreferenciaEscritorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.PublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.ReportePostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.RespuestaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.RevisionPosgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.RevisorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.RevisorRevisionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.SuscripcionCategoriaPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.SuscripcionPublicacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoAccesoPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoComentarioRevisorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoEscritorPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoEstadoPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoIdentificacionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoRelacionInstitucionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoReportePostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.TipoRevisionPostgreSqlDAO;
-import co.edu.uco.publiuco.data.dao.relational.postgreSql.VersionPostgreSqlDAO;
 
 public final class PostgreSqlServerDAOFactory extends DAOFactory{
 
 	private Connection connection;
 		
 	public PostgreSqlServerDAOFactory() {
-		abrirConexion();
+		openConection();
 	}
 	
 	@Override
-	protected final void abrirConexion() {
+	protected final void openConection() {
 		// It's my homework
 		connection = null;
 		
 	}
 
 	@Override
-	public final void closeTransaction() {
+	public final void closeConection() {
 		UtilSql.closeConnection(connection);
 	}
 
@@ -110,189 +40,194 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public final void cancelTransaction() {
+	public final void rollbackTransaction() {
 		// It's my homework (rollBack)
 		
 	}
 
 	@Override
-	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucion() {
+	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucionDAO() {
 		return new TipoRelacionInstitucionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public final AdministradorCategoriaDAO getAdministradorCategoria() {
+	public final AdministradorCategoriaDAO getAdministradorCategoriaDAO() {
 		return new AdministradorCategoriaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public CalificacionDAO getCalificacion() {
+	public CalificacionDAO getCalificacionDAO() {
 		return new CalificacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public CategoriaAdministradorCategoriaDAO getCategoriaAdministradorCategoria() {
+	public CategoriaAdministradorCategoriaDAO getCategoriaAdministradorCategoriaDAO() {
 		return new CategoriaAdministradorCategoriaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public CategoriaDAO getCategoria() {
+	public CategoriaDAO getCategoriaDAO() {
 		return new CategoriaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public ComentarioRevisorDAO getComentarioRevisor() {
+	public ComentarioRevisorDAO getComentarioRevisorDAO() {
 		return new ComentarioRevisorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public EscritorDAO getEscritor() {
+	public EscritorDAO getEscritorDAO() {
 		return new EscritorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public EscritorPublicacionDAO getEscritorPublicacion() {
+	public EscritorPublicacionDAO getEscritorPublicacionDAO() {
 		return new EscritorPublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public final EstadoDAO getEstado() {
+	public final EstadoDAO getEstadoDAO() {
 		return new EstadoPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public HistorialAccesoPublicacionDAO getHistorialAccesoPublicacion() {
+	public HistorialAccesoPublicacionDAO getHistorialAccesoPublicacionDAO() {
 		return new HistorialAccesoPublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public LectorDAO getLector() {
+	public LectorDAO getLectorDAO() {
 		return new LectorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public ObservacionRevisionDAO getObservacionRevision() {
+	public ObservacionRevisionDAO getObservacionRevisionDAO() {
 		return new ObservacionRevisionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PaisDAO getPais() {
+	public PaisDAO getPaisDAO() {
 		return new PaisPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PalabraClavePublicacionDAO getPalabraClavePublicacion() {
+	public PalabraClavePublicacionDAO getPalabraClavePublicacionDAO() {
 		return new PalabraClavePublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PerfilDAO getPerfil() {
+	public PerfilDAO getPerfilDAO() {
 		return new PerfilPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PersonaDAO getPersona() {
+	public PersonaDAO getPersonaDAO() {
 		return new PersonaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PlanCategoriaDAO getPlanCategoria() {
+	public PlanCategoriaDAO getPlanCategoriaDAO() {
 		return new PlanCategoriaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PlanPublicacionDAO getPlanPublicacion() {
+	public PlanPublicacionDAO getPlanPublicacionDAO() {
 		return new PlanPublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PreferenciaEscritorDAO getPreferenciaEscritor() {
+	public PreferenciaCategoriaDAO getPreferenciaCategoriaDAO() {
+		return new PreferenciaCategoriaPostgreSqlDAO(connection);
+	}
+	@Override
+	public PreferenciaEscritorDAO getPreferenciaEscritorDAO() {
 		return new PreferenciaEscritorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public PublicacionDAO getPublicacion() {
+	public PublicacionDAO getPublicacionDAO() {
 		return new PublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public ComentarioLectorDAO getComentarioLector() {
+	public ComentarioLectorDAO getComentarioLectorDAO() {
 		return new ComentarioLectorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public ReporteDAO getReporte() {
+	public ReporteDAO getReporteDAO() {
 		return new ReportePostgreSqlDAO(connection);
 	}
 
 	@Override
-	public RespuestaDAO getRespuesta() {
+	public RespuestaDAO getRespuestaDAO() {
 		return new RespuestaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public RevisionDAO getRevision() {
+	public RevisionDAO getRevisionDAO() {
 		return new RevisionPosgreSqlDAO(connection);
 	}
 
 	@Override
-	public RevisorDAO getRevisor() {
+	public RevisorDAO getRevisorDAO() {
 		return new RevisorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public RevisorRevisionDAO getRevisorRevision() {
+	public RevisorRevisionDAO getRevisorRevisionDAO() {
 		return new RevisorRevisionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public SuscripcionCategoriaDAO getuSuscripcionCategoria() {
+	public SuscripcionCategoriaDAO getuSuscripcionCategoriaDAO() {
 		return new SuscripcionCategoriaPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public SuscripcionPublicacionDAO getSuscripcionPublicacion() {
+	public SuscripcionPublicacionDAO getSuscripcionPublicacionDAO() {
 		return new SuscripcionPublicacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoAccesoDAO getTipoAcceso() {
+	public TipoAccesoDAO getTipoAccesoDAO() {
 		return new TipoAccesoPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoComentarioRevisorDAO getTipoComentario() {
+	public TipoComentarioRevisorDAO getTipoComentarioDAO() {
 		return new TipoComentarioRevisorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoEscritorDAO getTipoEscritor() {
+	public TipoEscritorDAO getTipoEscritorDAO() {
 		return new TipoEscritorPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoEstadoDAO getTipoEstado() {
+	public TipoEstadoDAO getTipoEstadoDAO() {
 		return new TipoEstadoPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoIdentificacionDAO getTipoIdentificacion() {
+	public TipoIdentificacionDAO getTipoIdentificacionDAO() {
 		return new TipoIdentificacionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoReporteDAO getTipoReporte() {
+	public TipoReporteDAO getTipoReporteDAO() {
 		return new TipoReportePostgreSqlDAO(connection);
 	}
 
 	@Override
-	public TipoRevisionDAO getTipoRevision() {
+	public TipoRevisionDAO getTipoRevisionDAO() {
 		return new TipoRevisionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public VersionDAO getVersion() {
+	public VersionDAO getVersionDAO() {
 		return new VersionPostgreSqlDAO(connection);
 	}
-	
+
+
 }

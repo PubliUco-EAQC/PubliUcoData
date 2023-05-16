@@ -24,16 +24,5 @@ public class TipoEscritorPostgreSqlDAO implements TipoEscritorDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoEscritorEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoEscritorEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

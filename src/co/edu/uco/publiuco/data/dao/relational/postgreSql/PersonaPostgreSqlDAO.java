@@ -2,6 +2,7 @@ package co.edu.uco.publiuco.data.dao.relational.postgreSql;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.UUID;
 
 import co.edu.uco.publiuco.data.dao.PersonaDAO;
 import co.edu.uco.publiuco.entities.PersonaEntity;
@@ -31,7 +32,7 @@ public class PersonaPostgreSqlDAO implements PersonaDAO {
 	}
 
 	@Override
-	public void delete(PersonaEntity entity) {
+	public void delete(UUID entity) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -24,16 +24,5 @@ public class TipoAccesoPostgreSqlDAO implements  TipoAccesoDAO {
 		return null;
 	}
 
-	@Override
-	public void update(TipoAccesoEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(TipoAccesoEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
