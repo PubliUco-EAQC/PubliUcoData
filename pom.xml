@@ -28,5 +28,10 @@
   		<artifactId>PubliUcoEntities</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
 	 </dependency>
+	  <dependency>
+	  	<groupId>co.edu.uco.publiuco</groupId>
+	  	<artifactId>PubliUcoApi</artifactId>
+	  	<version>0.0.1-SNAPSHOT</version>
+	  </dependency>
   </dependencies>
 </project>
