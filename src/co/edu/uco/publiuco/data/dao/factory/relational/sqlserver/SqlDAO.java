@@ -1,6 +1,7 @@
 package co.edu.uco.publiuco.data.dao.factory.relational.sqlserver;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -40,5 +41,8 @@ public abstract class SqlDAO <E>{
 	
 	protected abstract String prepareOrderBy();
 
+	protected abstract void setParameters(PreparedStatement preparedStatement, List<Object> parameters);
+	
+	protected abstract List<E> executeQuery(PreparedStatement preparedStatement);
 
 }
