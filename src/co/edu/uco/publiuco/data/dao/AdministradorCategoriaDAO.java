@@ -13,6 +13,7 @@ public interface AdministradorCategoriaDAO {
 
 	void update(AdministradorCategoriaEntity entity);
 
-	void delete(UUID entity);
+	void delete(UUID entityId);
+    
     
 }

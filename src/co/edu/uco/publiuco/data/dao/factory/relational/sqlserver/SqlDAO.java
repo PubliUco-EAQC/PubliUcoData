@@ -33,13 +33,13 @@ public abstract class SqlDAO <E>{
 		this.connection = connection;
 	}
 	
-	protected abstract String prepareSelect();
+	protected abstract String preparedSelect();
 	
-	protected abstract String prepareFrom();
+	protected abstract String preparedFrom();
 
-	protected abstract String prepareWhere(E entity, List<Object> parameters);
+	protected abstract String preparedWhere(E entity, List<Object> parameters);
 	
-	protected abstract String prepareOrderBy();
+	protected abstract String preparedOrderBy();
 
 	protected abstract void setParameters(PreparedStatement preparedStatement, List<Object> parameters);
 	
