@@ -11,18 +11,18 @@ public final class SqlServerDAOFactory extends DAOFactory{
 	private Connection connection;
 		
 	public SqlServerDAOFactory() {
-		openConection();
+		openConnection();
 	}
 	
 	@Override
-	protected final void openConection() {
+	protected final void openConnection() {
 		// It's my homework
 		connection = null;
 		
 	}
 
 	@Override
-	public final void closeConection() {
+	public final void closeConnection() {
 		// It's my homework
 		
 	}
@@ -196,11 +196,6 @@ public final class SqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public TipoComentarioRevisorDAO getTipoComentarioDAO() {
-		return null;
-	}
-
-	@Override
 	public TipoEscritorDAO getTipoEscritorDAO() {
 		return null;
 	}
@@ -227,6 +222,12 @@ public final class SqlServerDAOFactory extends DAOFactory{
 
 	@Override
 	public VersionDAO getVersionDAO() {
+		return null;
+	}
+
+	@Override
+	public TipoComentarioRevisorDAO getTipoComentarioRevisorDAO() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

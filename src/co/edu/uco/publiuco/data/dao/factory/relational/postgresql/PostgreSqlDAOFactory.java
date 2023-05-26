@@ -7,51 +7,64 @@ import co.edu.uco.publiuco.data.dao.relational.postgreSql.*;
 import co.edu.uco.publiuco.utils.UtilSql;
 import co.edu.uco.publiuco.data.dao.factory.DAOFactory;
 
-public final class PostgreSqlServerDAOFactory extends DAOFactory{
+public final class PostgreSqlDAOFactory extends DAOFactory{
 
-	private Connection connection;
-		
-	public PostgreSqlServerDAOFactory() {
-		openConection();
-	}
-	
-	@Override
-	protected final void openConection() {
-		// It's my homework
-		connection = null;
-		
+	private static Connection connection;
+	private static String JDBCURL = "jdbc:postgresql://mahmud.db.elephantsql.com:5432/nfjaiiyr";
+	private static String USERNAME = "nfjaiiyr";
+	private static String PASSWORD = "hFdpP8B7-CxwFNh4IuZ3NXdqnJbegOcf";
+
+	public PostgreSqlDAOFactory() {
+		openConnection();
 	}
 
 	@Override
-	public final void closeConection() {
+	protected void openConnection() {
+		connection = UtilSql.openConnection(JDBCURL, USERNAME, PASSWORD);
+	}
+
+	@Override
+	public void closeConnection() {
 		UtilSql.closeConnection(connection);
 	}
 
 	@Override
-	public final void initTransaction() {
-		// It's my homework (serAutoCommit -> false)
-		
+	public void initTransaction() {
+		UtilSql.initTransaction(connection);
 	}
 
 	@Override
-	public final void commitTransaction() {
-		// It's my homework (Commit)
-		
+	public void commitTransaction() {
+		UtilSql.commitTransaction(connection);
 	}
 
 	@Override
-	public final void rollbackTransaction() {
-		// It's my homework (rollBack)
-		
+	public void rollbackTransaction() {
+		UtilSql.rollbackTransaction(connection);
 	}
 
 	@Override
-	public final TipoRelacionInstitucionDAO getTipoRelacionInstitucionDAO() {
+	public TipoEstadoDAO getTipoEstadoDAO() {
+		return new TipoEstadoPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public EstadoDAO getEstadoDAO() {
+		return new EstadoPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public PreferenciaCategoriaDAO getPreferenciaCategoriaDAO() {
+		return new PreferenciaCategoriaPostgreSqlDAO(connection);
+	}
+
+	@Override
+	public TipoRelacionInstitucionDAO getTipoRelacionInstitucionDAO() {
 		return new TipoRelacionInstitucionPostgreSqlDAO(connection);
 	}
 
 	@Override
-	public final AdministradorCategoriaDAO getAdministradorCategoriaDAO() {
+	public AdministradorCategoriaDAO getAdministradorCategoriaDAO() {
 		return new AdministradorCategoriaPostgreSqlDAO(connection);
 	}
 
@@ -71,6 +84,11 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
+	public ComentarioLectorDAO getComentarioLectorDAO() {
+		return new ComentarioLectorPostgreSqlDAO(connection);
+	}
+
+	@Override
 	public ComentarioRevisorDAO getComentarioRevisorDAO() {
 		return new ComentarioRevisorPostgreSqlDAO(connection);
 	}
@@ -83,11 +101,6 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	@Override
 	public EscritorPublicacionDAO getEscritorPublicacionDAO() {
 		return new EscritorPublicacionPostgreSqlDAO(connection);
-	}
-
-	@Override
-	public final EstadoDAO getEstadoDAO() {
-		return new EstadoPostgreSqlDAO(connection);
 	}
 
 	@Override
@@ -136,10 +149,6 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public PreferenciaCategoriaDAO getPreferenciaCategoriaDAO() {
-		return new PreferenciaCategoriaPostgreSqlDAO(connection);
-	}
-	@Override
 	public PreferenciaEscritorDAO getPreferenciaEscritorDAO() {
 		return new PreferenciaEscritorPostgreSqlDAO(connection);
 	}
@@ -147,11 +156,6 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	@Override
 	public PublicacionDAO getPublicacionDAO() {
 		return new PublicacionPostgreSqlDAO(connection);
-	}
-
-	@Override
-	public ComentarioLectorDAO getComentarioLectorDAO() {
-		return new ComentarioLectorPostgreSqlDAO(connection);
 	}
 
 	@Override
@@ -195,18 +199,13 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public TipoComentarioRevisorDAO getTipoComentarioDAO() {
+	public TipoComentarioRevisorDAO getTipoComentarioRevisorDAO() {
 		return new TipoComentarioRevisorPostgreSqlDAO(connection);
 	}
 
 	@Override
 	public TipoEscritorDAO getTipoEscritorDAO() {
 		return new TipoEscritorPostgreSqlDAO(connection);
-	}
-
-	@Override
-	public TipoEstadoDAO getTipoEstadoDAO() {
-		return new TipoEstadoPostgreSqlDAO(connection);
 	}
 
 	@Override
@@ -229,5 +228,10 @@ public final class PostgreSqlServerDAOFactory extends DAOFactory{
 		return new VersionPostgreSqlDAO(connection);
 	}
 
-
+	public static void main(String[] args) {
+		// UtilSql.openConnection(JDBCURL, USERNAME, PASSWORD);
+		// UtilSql.closeConnection(connection);
+		PostgreSqlDAOFactory intentoultimoomesuicido = new PostgreSqlDAOFactory();
+		intentoultimoomesuicido.closeConnection();
+	}
 }

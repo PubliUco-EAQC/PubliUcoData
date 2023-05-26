@@ -2,40 +2,43 @@ package co.edu.uco.publiuco.data.dao.factory;
 
 import co.edu.uco.publiuco.data.dao.*;
 
-import co.edu.uco.publiuco.data.dao.factory.relational.postgresql.PostgreSqlServerDAOFactory;
+import co.edu.uco.publiuco.data.dao.factory.relational.postgresql.PostgreSqlDAOFactory;
 import co.edu.uco.publiuco.data.dao.factory.relational.sqlserver.SqlServerDAOFactory;
 
 public abstract class DAOFactory {
 	
-	public static DAOFactory getFactory(final Factory factory) {
+public static DAOFactory getFactory(final Factory factory) {
 		
 		DAOFactory daoFactory;
+		switch (factory) {			
+			case SQLSERVER: {
+				daoFactory = new SqlServerDAOFactory();
+				break;
+			}
+			case POSTGRESQL: {
+				daoFactory = new PostgreSqlDAOFactory();
+				break;
+			}
+			default: {
+				throw new IllegalArgumentException("Unexpected value: " + factory);
+			}
+		}
 		
-		switch (factory) {
-		case SQLSERVER: {
-			daoFactory = new SqlServerDAOFactory();
-			break;
-		}
-		case POSTGRESQL: {
-			daoFactory = new PostgreSqlServerDAOFactory();
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Not implementd yet!");
-		}
 		return daoFactory;
 	}
 	
-	protected abstract void openConection();
+	protected abstract void openConnection();
 	
-	public abstract void closeConection();
+	public abstract void closeConnection();
 	
 	public abstract void initTransaction();
 	
 	public abstract void commitTransaction();
 	
 	public abstract void rollbackTransaction();
-		
+	
+	public abstract PreferenciaCategoriaDAO getPreferenciaCategoriaDAO();
+	
 	public abstract TipoRelacionInstitucionDAO getTipoRelacionInstitucionDAO();
 
 	public abstract AdministradorCategoriaDAO getAdministradorCategoriaDAO();
@@ -75,7 +78,6 @@ public abstract class DAOFactory {
 	public abstract PlanPublicacionDAO getPlanPublicacionDAO();
 	
 	public abstract PreferenciaEscritorDAO getPreferenciaEscritorDAO();
-	public abstract PreferenciaCategoriaDAO getPreferenciaCategoriaDAO();
 	
 	public abstract PublicacionDAO getPublicacionDAO();
 	
@@ -94,8 +96,8 @@ public abstract class DAOFactory {
 	public abstract SuscripcionPublicacionDAO getSuscripcionPublicacionDAO();
 
 	public abstract TipoAccesoDAO getTipoAccesoDAO();
-
-	public abstract TipoComentarioRevisorDAO getTipoComentarioDAO();
+	
+	public abstract TipoComentarioRevisorDAO getTipoComentarioRevisorDAO();
 
 	public abstract TipoEscritorDAO getTipoEscritorDAO();
 
@@ -108,6 +110,5 @@ public abstract class DAOFactory {
 	public abstract TipoRevisionDAO getTipoRevisionDAO();
 
 	public abstract VersionDAO getVersionDAO();
-
-
+	
 }
