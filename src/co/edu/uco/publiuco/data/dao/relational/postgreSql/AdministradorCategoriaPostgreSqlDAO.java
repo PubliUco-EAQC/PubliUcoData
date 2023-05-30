@@ -28,7 +28,7 @@ public class AdministradorCategoriaPostgreSqlDAO extends SqlDAO<AdministradorCat
 		
 		try (var preparedStatement = getConnection().prepareStatement(sqlStatement)) {
 			preparedStatement.setObject(1, entity.getIdentificador());
-			preparedStatement.setObject(2, entity.getPersona());
+			preparedStatement.setObject(2, entity.getDatosPersona());
 			preparedStatement.setObject(3, entity.getEstado());
 			
 			preparedStatement.executeUpdate();
@@ -141,16 +141,6 @@ public class AdministradorCategoriaPostgreSqlDAO extends SqlDAO<AdministradorCat
 				where.append("WHERE identificador = ? ");
 				setWhere = false;
 			}
-			/*if (!UtilText.getUtilText().isEmpty(entity.getDatosPersona().getIdentificador())) {
-				parameters.add(entity.getDatosPersona().getIdentificador());
-				where.append(setWhere ? "WHERE " : "AND ").append("nombre = ? ");
-				setWhere = false;
-			}
-			if (!UtilText.getUtilText().isEmpty(entity.getDescripcion())) {
-				parameters.add(entity.getDescripcion());
-				where.append(setWhere ? "WHERE " : "AND ").append("descripcion = ? ");
-				setWhere = false;
-			}*/
 		}
 		
 		return where.toString();

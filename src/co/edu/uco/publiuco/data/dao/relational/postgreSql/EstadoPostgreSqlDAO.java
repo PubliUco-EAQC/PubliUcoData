@@ -11,6 +11,8 @@ import co.edu.uco.publiuco.crosscutting.exception.PubliUcoDataException;
 import co.edu.uco.publiuco.data.dao.EstadoDAO;
 import co.edu.uco.publiuco.data.dao.factory.relational.sqlserver.SqlDAO;
 import co.edu.uco.publiuco.entities.EstadoEntity;
+import co.edu.uco.publiuco.entities.TipoEstadoEntity;
+import co.edu.uco.publiuco.utils.Messages;
 import co.edu.uco.publiuco.utils.UtilObject;
 import co.edu.uco.publiuco.utils.UtilText;
 import co.edu.uco.publiuco.utils.UtilUUID;
@@ -21,190 +23,120 @@ public final class EstadoPostgreSqlDAO extends SqlDAO<EstadoEntity> implements E
 		super(connection);
 	}
 
-	@Override
-
-	public final void create(final EstadoEntity entity) {
-		var sqlStatement = "INSERT INTO Estado(identificador, nombre) VALUES (?, ?)";
-		
-		try (var preparedStatement = getConnection().prepareStatement(sqlStatement)) {
-			
-			preparedStatement.setObject(1, entity.getIdentificador());
-			preparedStatement.setString(2, entity.getNombre());
-			
-			preparedStatement.executeUpdate();
-		
-		} catch(final SQLException exception) {
-			var userMessage="Se ha presentado un problema tratando de registrar la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo create de la clase Estado. Por favor verifique la traza completa del error..";
-			
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		} catch (final Exception exception) {
-			var userMessage="Se ha presentado un problema inesperado de registrar la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo create de la clase Estado. Por favor verifique la traza completa del error..";
-			
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		}
-	}
 
 	@Override
-	public final List<EstadoEntity> read(final EstadoEntity entity) {
+	public final List<EstadoEntity> read(EstadoEntity entity) {
 		var sqlStatement = new StringBuilder();
 		var parameters = new ArrayList<>();
 		
-		sqlStatement.append(prepareSelect());
-		sqlStatement.append(prepareFrom());
-		sqlStatement.append(prepareWhere(entity, parameters));
+		sqlStatement.append(preparedSelect());
+		sqlStatement.append(preparedFrom());
+		sqlStatement.append(preparedWhere(entity, parameters));
+		sqlStatement.append(preparedOrderBy());
 		
-		
-		try (var preparedStatement = getConnection().prepareStatement(sqlStatement.toString())){
-			setParameters(preparedStatement, parameters);
-			return executeQuery(preparedStatement);
+		try (var preparedstatement = getConnection().prepareStatement(sqlStatement.toString())){
+			setParameters(preparedstatement, parameters);
 			
-		}catch(final PubliUcoDataException exception) {
-			throw exception;
-		}catch(SQLException exception){
-			var userMessage="Se ha presentado un problema tratando de modificar la informacion del Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo update de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		}catch(Exception exception){
-			var userMessage="Se ha presentado un problema tratando de modificar la informacion del Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo update de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
+			return executeQuery(preparedstatement);
+			
+		} catch (SQLException exception) {
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_CREATE, Messages.TipoEstadoSql.USER_MESSAGE_CREATE, exception);
+			
+		}catch (Exception exception) {
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_CREATE_JAVA_EXCEPTION, Messages.TipoEstadoSql.USER_MESSAGE_CREATE, exception);
 		}
 	}
 
+
 	@Override
-	public final void update(final EstadoEntity entity) {
-		var sqlStatement = "UPDATE Estado SET nombre=?, WHERE identificador=?";
-
-		try (var preparedStatement = getConnection().prepareStatement(sqlStatement)) {
-			
-			preparedStatement.setString(1, entity.getNombre());
-			preparedStatement.executeUpdate();
-
-		} catch(final SQLException exception) {
-			var userMessage="Se ha presentado un problema tratando de modificar la informacion del Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo update de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		} catch (final Exception exception) {
-			var userMessage="Se ha presentado un problema inesperado de modificar la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo update de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		}
+	protected final String preparedSelect() {
+		return "SELECT e.identificador, e.nombre, e.descripcion, te.identificador, te.nombre, te.descripcion ";
 	}
 
 	@Override
-	public final void delete(UUID entity) {
-		var sqlStatement = "DELETE FROM \"TipoEstado\" WHERE identificador = ?";
-
-		try (var preparedStatement = getConnection().prepareStatement(sqlStatement)) {
-			
-			preparedStatement.setObject(1, entity);
-			preparedStatement.executeUpdate();
-
-		} catch(final SQLException exception) {
-			var userMessage="Se ha presentado un problema tratando de eliminar el Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo delete de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		} catch (final Exception exception) {
-			var userMessage="Se ha presentado un problema inesperado de delete la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo delete de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		}		
+	protected final String preparedFrom() {
+		return "FROM \"Estado\" e JOIN \"TipoEstado\" te ON te.identificador = e.\"tipoEstado\" ";
 	}
 
 	@Override
-	protected final String prepareSelect() {
-		return "SELECT identificador, nombre ";
-	}
-
-	@Override
-	protected final String prepareFrom() {
-		return "FROM Estado ";
-	}
-
-	@Override
-	protected final String prepareWhere(final EstadoEntity entity, List<Object> parameters) {
+	protected final String preparedWhere(final EstadoEntity entity, List<Object> parameters) {
 		final var where = new StringBuilder("");
-		
-		parameters = UtilObject.getDefault(parameters, new ArrayList<>());
-		
+		parameters = UtilObject.getDefault(parameters, new ArrayList<>()); //por referencia
 		var setWhere = true;
 		
-		if(UtilObject.isNull(entity)) {
+		if (!UtilObject.isNull(entity)){
 			
-			if(!UtilUUID.isDefault(entity.getIdentificador())) {
+			if (!UtilUUID.isDefault(entity.getIdentificador())) {
 				parameters.add(entity.getIdentificador());
-				where.append("WHERE identificador=?");
+				where.append("WHERE e.identificador = ? ");
 				setWhere = false;
 			}
-			
-			if(UtilText.isEmpty(entity.getNombre())) {
+			UtilText.getUtilText();
+			if (!UtilText.isEmpty(entity.getNombre())) {
 				parameters.add(entity.getNombre());
-				where.append(setWhere ? "WHERE " : "AND ").append("nombre=?");
+				where.append(setWhere ? "WHERE " : "AND ").append("e.nombre = ? ");
 				setWhere = false;
 			}
-			
+			if (UtilObject.isNull(entity.getTipo().getIdentificador()) && !UtilUUID.isDefault(entity.getTipo().getIdentificador())){
+				parameters.add(entity.getTipo().getIdentificador());
+				where.append(setWhere ? "WHERE " : "AND ").append(" te.identificador = ? ");
+				setWhere = false;
+			}
+			if (!UtilObject.isNull(entity.getTipo().getNombre()) && UtilText.isEmpty(entity.getTipo().getNombre())) {
+				parameters.add(entity.getTipo().getNombre());
+				where.append(setWhere ? "WHERE " : "AND ").append("te.nombre = ? ");
+				setWhere = false;
+			}
 		}
 		
 		return where.toString();
 	}
 
 	@Override
-	protected final String prepareOrderBy() {
+	protected final String preparedOrderBy() {
 		return "ORDER BY nombre ASC";
 	}
-
+	
 	@Override
-	protected void setParameters(final PreparedStatement preparedStatement, final  List<Object> parameters) {
+	protected final void setParameters(final PreparedStatement preparedStatement, final List<Object> parameters) {
 		try {
-			if(!UtilObject.isNull(parameters) && !UtilObject.isNull(preparedStatement)) {
-				for (int index=0; index < parameters.size(); index++){
+			if (!UtilObject.isNull(parameters) && !UtilObject.isNull(preparedStatement))  {
+				for(int index = 0; index < parameters.size(); index ++) {
 					preparedStatement.setObject(index + 1, parameters.get(index));
 				}
-			}
-		}  catch(final SQLException exception) {
-			var userMessage="Se ha presentado un problema tratando de consultar la informacion de los Estados";
-			var technicalMessage="Se ha presentado un problema inesperado tipo SQLException dentro del metodo setParameters de la clase Estado. Por favor verifique la traza completa del error..";
+			}	
+		}catch(final SQLException exception) {
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_SET_PARAMETERS, Messages.TipoEstadoSql.USER_MESSAGE_SET_PARAMETERS, exception);
+			
+		}catch(final Exception exception) {			
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_SET_PARAMETERS_JAVA_EXCEPTION, Messages.TipoEstadoSql.USER_MESSAGE_SET_PARAMETERS, exception);
 
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		} catch (final Exception exception) {
-			var userMessage="Se ha presentado un problema inesperado de  la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo delete de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
 		}
 	}
 
 	@Override
-	protected List<EstadoEntity> executeQuery(PreparedStatement preparedStatement) {
-		try(var resultSet = preparedStatement.executeQuery()){
-			
-			final List<EstadoEntity> result = new ArrayList<>();
-			
+	protected final List<EstadoEntity> executeQuery(PreparedStatement preparedStatement) {
+		
+		final List<EstadoEntity> result = new ArrayList<>();
+		
+		try (var resultSet = preparedStatement.executeQuery()){
 			while(resultSet.next()) {
-				var entityTmp = new EstadoEntity(resultSet.getObject("identificador",UUID.class), resultSet.getString("nombre"), null);
+				var entityTmp = new EstadoEntity(
+						resultSet.getObject(1, UUID.class), 
+						resultSet.getString(2),
+						TipoEstadoEntity.create().setIdentificador(resultSet.getObject(4, UUID.class)).setNombre(resultSet.getString(5)).setDescripcion(resultSet.getString(6)),
+						resultSet.getString(3));
 				result.add(entityTmp);
 			}
 			return result;
 			
-		} catch(final SQLException exception) {
-			var userMessage="Se ha presentado un problema tratando de consultar la informacion de los Estados";
-			var technicalMessage="Se ha presentado un problema inesperado tipo SQLException dentro del metodo executeQuery de la clase Estado. Por favor verifique la traza completa del error..";
+		} catch(final SQLException exception) {			
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_EXECUTE, Messages.TipoEstadoSql.USER_MESSAGE_EXECUTE, exception);
+			
+		}catch(final Exception exception) {			
+			throw PubliUcoDataException.create(Messages.TipoEstadoSql.TECHNICAL_MESSAGE_EXECUTE_JAVA_EXCEPTION, Messages.TipoEstadoSql.USER_MESSAGE_EXECUTE, exception);
 
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		} catch (final Exception exception) {
-			var userMessage="Se ha presentado un problema inesperado de  la informacion del nuevo Estado";
-			var technicalMessage="Se ha presentado un problema de tipo SQLException dentro del metodo delete de la clase Estado. Por favor verifique la traza completa del error..";
-
-			throw PubliUcoDataException.create(technicalMessage, userMessage, exception);
-		}
+		}		
 	}
 
 }

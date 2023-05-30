@@ -9,32 +9,13 @@ import co.edu.uco.publiuco.entities.EstadoEntity;
 
 public final class EstadoSqlServerDAO implements EstadoDAO{
 	
-	public EstadoSqlServerDAO(final Connection connection) {
-		
-	}
-
-	@Override
-	public void create(final EstadoEntity entity) {
-		// TODO Auto-generated method stub
+public EstadoSqlServerDAO(final Connection connection) {
 		
 	}
 
 	@Override
 	public final List<EstadoEntity> read(final EstadoEntity entity) {
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public final void update(final EstadoEntity entity) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(UUID entity) {
-		// TODO Auto-generated method stub
-		
-	}
+	}	
 
 }
